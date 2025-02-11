@@ -1,0 +1,35 @@
+import time
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+
+# service = Service("C:\\Users\\vgaggera\\drivers\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe")
+service = Service(ChromeDriverManager().install())
+# service = Service(GeckoDriverManager().install())
+driver = webdriver.Chrome(service=service)
+# driver.get("https://opensource-demo.orangehrmlive.com/")
+driver.get("https://rahulshettyacademy.com/angularpractice/")
+## Xpath element [parse
+driver.find_element(By.XPATH, "//input[@name='name']").send_keys('Vinodh')
+driver.find_element(By.XPATH, "//input[@name='email']").send_keys('Vgaggera@gmail.com')
+driver.find_element(By.XPATH, "//input[@placeholder='Password']").send_keys('Vk@85678')
+driver.find_element(By.XPATH, "//label[@class='form-check-label']").click()
+driver.find_element(By.XPATH, "//input[@value='option2']").click()
+driver.find_element(By.XPATH, "//input[@value='option2']").click()
+driver.find_element(By.XPATH, "//input[@class='btn btn-success']").click()
+v = driver.find_element(By.CLASS_NAME, "alert-success").text
+assert 'success' in v
+driver.find_element(By.XPATH, "(//input[@type='text'])[3]").send_keys('again you are logging')
+
+time.sleep(5)
+## Css selector
+# driver.find_element(By.CSS_SELECTOR, "input[name='name']").send_keys('Vinodh')
+# driver.find_element(By.CSS_SELECTOR, "input[name='email']").send_keys('Vgaggera@gmail.com')
+# driver.find_element(By.CSS_SELECTOR, "input[placeholder='Password']").send_keys('Vk@85678')
+# driver.find_element(By.CSS_SELECTOR, "label[class='form-check-label']").click()
+# driver.find_element(By.CSS_SELECTOR, "input[value='option2']").click()
+# driver.find_element(By.XPATH, "input[class='btn btn-success']").click()
+# driver.find_element(By.CSS_SELECTOR, "(input[type='text'])[3]").send_keys('again you are logging')
+# time.sleep(5)
