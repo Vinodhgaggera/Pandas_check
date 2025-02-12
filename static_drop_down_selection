@@ -1,0 +1,29 @@
+from selenium import webdriver
+from selenium.webdriver.support.select import Select
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
+import time
+
+service = Service(ChromeDriverManager().install())
+driver = webdriver.Chrome(service=service)
+driver.get('https://rahulshettyacademy.com/angularpractice/')
+driver.maximize_window()
+time.sleep(3)
+driver.find_element(By.XPATH, "//input[@name='name']").send_keys('Vinodh')
+driver.find_element(By.XPATH, "//input[@name='email']").send_keys('Vgaggera@gmail.com')
+driver.find_element(By.XPATH, "//input[@placeholder='Password']").send_keys('Vk@85678')
+driver.find_element(By.XPATH, "//label[@class='form-check-label']").click()
+driver.find_element(By.XPATH, "//input[@value='option2']").click()
+driver.find_element(By.XPATH, "//input[@value='option2']").click()
+driver.find_element(By.XPATH, "//input[@class='btn btn-success']").click()
+v = driver.find_element(By.CLASS_NAME, "alert-success").text
+#static dropdown selection
+dropdown = Select(driver.find_element(By.ID,"exampleFormControlSelect1"))
+dropdown.select_by_index(1)
+time.sleep(3)
+dropdown.select_by_index(0)
+time.sleep(3)
+dropdown.select_by_visible_text('Female')
+# print(select(driver.find_element(By.ID,"exampleFormControlSelect1")))
+time.sleep(5)
