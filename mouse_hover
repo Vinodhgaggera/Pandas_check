@@ -1,0 +1,15 @@
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.service import Service
+import time
+driver = webdriver.Chrome(service=Service("C:\\Users\\vgaggera\\drivers\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe"))
+driver.implicitly_wait(5)
+driver.get('https://rahulshettyacademy.com/AutomationPractice/')
+driver.maximize_window()
+actions = ActionChains(driver)
+actions.move_to_element(driver.find_element(By.ID,"mousehover")).perform()
+# actions.context_click(driver.find_element(By.LINK_TEXT,"Top")).click().perform()
+actions.move_to_element(driver.find_element(By.LINK_TEXT,"Reload")).click().perform()
+
+# actions.context_click(driver.find_element(By.LINK_TEXT,"Reload")).click().perform()
