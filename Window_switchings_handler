@@ -1,0 +1,32 @@
+from selenium import webdriver
+from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions
+from selenium.webdriver.support.select import Select
+from selenium.webdriver.chrome.service import Service
+import time
+import re
+
+from selenium.webdriver.support.wait import WebDriverWait
+
+driver = webdriver.Chrome(service=Service("C:\\Users\\vgaggera\\drivers\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe"))
+driver.implicitly_wait(5)
+driver.get('https://rahulshettyacademy.com/loginpagePractise/')
+driver.find_element(By.LINK_TEXT,"Free Access to InterviewQues/ResumeAssistance/Material").click()
+windows = driver.window_handles
+driver.switch_to.window(windows[1])
+text = driver.find_element(By.XPATH,"//p [@class='im-para red']").text
+email = re.search(r'\S+?@\S+',text).group()
+driver.close()
+driver.switch_to.window(windows[0])
+driver.find_element(By.XPATH,"//input [@name='username']").send_keys(email)
+driver.find_element(By.XPATH,"//input [@name='password']").send_keys('learning')
+driver.find_element(By.XPATH,"//label [@class='customradio'][2]").click()
+dropdown = Select(driver.find_element(By.XPATH,"//select [@class='form-control']"))
+dropdown.select_by_value('teach')
+driver.find_element(By.XPATH,"//button [@id='okayBtn']").click()
+driver.find_element(By.XPATH,"//input [@id='terms']").click()
+driver.find_element(By.XPATH,"//input [@id='signInBtn']").click()
+wait = WebDriverWait(driver,10)
+wait.until(expected_conditions.visibility_of_element_located((By.CSS_SELECTOR, ".alert-danger")))
+print(driver.find_element(By.CSS_SELECTOR, ".alert-danger").text)
